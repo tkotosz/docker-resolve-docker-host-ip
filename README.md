@@ -10,10 +10,13 @@ This shell script is for adding the same `host.docker.internal` entry to the hos
 ```
 FROM ...
 
-# install mhsendmail-wrapper
+# install resolve-docker-host-ip script
 COPY --from=tkotosz/resolve-docker-host-ip /usr/bin/resolve-docker-host-ip /usr/local/bin/resolve-docker-host-ip
 
 ...
+
+# Wrap the entry point (sleep infinity in this case) so that the host IP is resolved when the container started
+ENTRYPOINT ["/usr/local/bin/resolve-docker-host-ip","sleep","infinity"]
 ```
 
 See `Dockerfile` in the `test` folder for example.
