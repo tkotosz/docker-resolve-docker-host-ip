@@ -8,9 +8,12 @@ This shell script is for adding the same `host.docker.internal` entry to the hos
 ## Usage
 
 ```
-FROM ...
+FROM alpine
 
-# install resolve-docker-host-ip script
+# Install required iproute2 package (required by the resolve-docker-host-ip script) 
+RUN apk add iproute2
+
+# Install resolve docker host IP script
 COPY --from=tkotosz/resolve-docker-host-ip /usr/bin/resolve-docker-host-ip /usr/local/bin/resolve-docker-host-ip
 
 ...
