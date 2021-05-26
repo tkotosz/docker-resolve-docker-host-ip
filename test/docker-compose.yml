@@ -1,6 +1,12 @@
 version: '3.7'
 
 services:
-  test-service:
+  test-service-alpine:
     build:
       context: .
+      dockerfile: Dockerfile-alpine
+
+  test-service-debian:
+    build:
+      context: .
+      dockerfile: Dockerfile-debian
