@@ -3,7 +3,7 @@
 set -e
 
 DOCKER_INTERNAL_HOST="host.docker.internal"
-if ! grep $DOCKER_INTERNAL_HOST /etc/hosts > /dev/null ; then
+if [ -z "$(getent hosts host.docker.internal)" ]; then
     # See https://stackoverflow.com/questions/22944631/how-to-get-the-ip-address-of-the-docker-host-from-inside-a-docker-container/24716645#24716645
     DOCKER_INTERNAL_IP=$(/sbin/ip route|awk '/default/ { print $3 }')
     echo "$DOCKER_INTERNAL_IP $DOCKER_INTERNAL_HOST" >> /etc/hosts
